@@ -1,46 +1,51 @@
-prompt_a = """
-I am a marketing manager at a retail company and we have just finished 
-a three-month campaign. My team has collected customer feedback through 
-an online survey and we now have about 500 responses stored in a 
-spreadsheet. Each response includes the customer's age group, the 
-product they purchased, their satisfaction rating from 1 to 5, and a 
-short written comment. I need to present the findings to our CEO next 
-Friday in a way that is easy to understand. Can you analyse this data 
-for me, highlight which age groups and products have the lowest 
-satisfaction scores, identify the most common complaints from the 
-written comments, and summarise everything in a short paragraph I can 
-use as an executive summary?
+"""
+Question 8 — Python: Find and Fix the Bug  [Short Answer — Write Code]
+
+The function below is SUPPOSED to count how many even numbers are in a list.
+It runs without crashing, but it returns the wrong answer.
+
+    def count_evens(numbers):
+        count = 0
+        for n in numbers:
+            if n % 2 == 1:      # <-- something here is wrong
+                count = count + 1
+        return count
+
+    # Expected: 4  (the evens are 2, 4, 6, 8)
+    print(count_evens([1, 2, 3, 4, 5, 6, 8]))
+
+------------------------------------------------------------------
+Task
+------------------------------------------------------------------
+
+(a) What does the buggy version actually return for [1, 2, 3, 4, 5, 6, 8], and why?
+
+    Answer: It returns 3. The condition `n % 2 == 1` is true when a number
+    leaves a remainder of 1 after dividing by 2, i.e. when it is ODD, so the
+    function counts the odd numbers 1, 3 and 5 instead of the evens.
+
+(b) Fix the bug. Write the corrected function below.
+    (A one-character change is enough, but you must understand why.)
 """
 
-prompt_b = """
-Role: You are a data analyst helping a retail marketing team.
-Task: Analyse customer survey data from a 3-month campaign.
-Data: 500 responses containing age group, product purchased, 
-satisfaction rating (1-5), and written comments.
-Steps:
-1. Identify age groups and products with the lowest satisfaction scores.
-2. Extract the most common themes from the written comments.
-3. Summarise findings in an executive summary paragraph.
-Audience: CEO presentation on Friday.
-Constraints: Keep the summary concise and free of technical jargon.
+def count_evens(numbers):
+    """Return how many even numbers are in the list `numbers`."""
+    count = 0
+    for n in numbers:
+        # An even number divides by 2 with no remainder, so check for 0
+        # (the bug was checking for a remainder of 1, which means odd).
+        if n % 2 == 0:
+            count = count + 1
+    return count
+
+
+if __name__ == "__main__":
+    print(count_evens([1, 2, 3, 4, 5, 6, 8]))  # Expected: 4 (2, 4, 6, 8)
+
+
 """
+(c) In one sentence, explain in plain English what `n % 2 == 0` checks.
 
-
-# Task 1
-# Read both prompts above carefully, then answer the questions below as comments.
-
-# Q8a: Which prompt do you think will get a better response from an AI?
-# Your answer:
-
-# Q8b: Give TWO reasons to support your choice.
-# Your answer (Reason 1):
-# Your answer (Reason 2):
-
-# Q8c: What is ONE strength of the prompt you did NOT choose?
-# Your answer:
-
-
-# Task 2
-# Rewrite either prompt by borrowing ONE element from the other
-# to make it stronger. Explain what you borrowed and why.
-# Your answer:
+    Answer: It checks whether n divided by 2 leaves a remainder of 0, which
+    means n is an even number.
+"""
